@@ -1,6 +1,7 @@
 package edu.bgsu.notebook;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,8 +12,7 @@ import java.util.List;
 
 public class Note
 {
-	private static int numberOfNotes = 0;
-	private int id;
+	private Date timeStamp;
 	private String title;
 	private String comments;
 	private NotebookColors color;
@@ -23,7 +23,7 @@ public class Note
 	 */
 	public Note(String title, String comments, NotebookColors color, List<Category> categories) 
 	{
-		this.id = ++numberOfNotes;
+		this.timeStamp = new Date();
 		this.title = title != null ? title : "";
 		this.comments = comments != null ? comments : "";
 		this.categories = categories != null ? categories : new ArrayList<Category>();
@@ -80,8 +80,8 @@ public class Note
 		return color;
 	}
 	
-	public int getID()
+	public Date getTimeStamp()
 	{
-		return id;
+		return timeStamp;
 	}
 }

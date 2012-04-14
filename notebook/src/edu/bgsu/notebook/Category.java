@@ -1,5 +1,7 @@
 package edu.bgsu.notebook;
 
+import java.util.Date;
+
 /**
  * Category class.
  * @author Josh LaRoe
@@ -8,8 +10,7 @@ package edu.bgsu.notebook;
 
 public class Category 
 {	
-	private static int numberOfCategories = 0;
-	private int id;
+	private Date timeStamp;
 	private String title;
 	private String comments;
 
@@ -17,7 +18,7 @@ public class Category
 	 *  Constructor for new category.
 	 */
 	public Category(String _title, String _comments) {
-		this.id = ++numberOfCategories;
+		this.timeStamp = new Date();
 		this.title = title != null ? title : "";
 		this.comments = comments != null ? comments : "";
 	}
@@ -42,8 +43,8 @@ public class Category
 		return title;
 	}
 	
-	public int getID()
+	public Date getTimeStamp()
 	{
-		return id;
+		return timeStamp;
 	}
 }
