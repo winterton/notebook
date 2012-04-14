@@ -84,4 +84,9 @@ public class Note
 	{
 		return timeStamp;
 	}
+	
+	public void setTimeStamp(Date timeStamp)
+	{
+		this.timeStamp = timeStamp;
+	}
 }

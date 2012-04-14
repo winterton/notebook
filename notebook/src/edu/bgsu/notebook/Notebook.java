@@ -21,6 +21,8 @@ public class Notebook
 	public Notebook(String _name) 
 	{
 		name = _name;
+		notes = new ArrayList<Note>();
+		categories = new ArrayList<Category>();
 	}
 
 	/**
@@ -90,5 +92,15 @@ public class Notebook
 	public void setName(String _name)
 	{
 		name = _name;
+	}
+	
+	public List<Note> getNotes()
+	{
+		return notes;
+	}
+	
+	public List<Category> getCategories()
+	{
+		return categories;
 	}
 }

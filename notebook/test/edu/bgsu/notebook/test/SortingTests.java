@@ -1,5 +1,7 @@
 package edu.bgsu.notebook.test;
 
+import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,15 +19,20 @@ public class SortingTests
 	{
 		Notebook myNotebook = new Notebook("My notebook");
 		
+		long date = 132537200;
+		long day = 86400;
+		
 		myNotebook.add(new Note("Lactose","This is my first note", NotebookColors.BLACK, null));
-		myNotebook.add(new Note("Anger","This is my third note", NotebookColors.BLACK, null));
-		myNotebook.add(new Note("Celebrate","This is my second note", NotebookColors.BLACK, null));
+		myNotebook.add(new Note("Anger","This is my second note", NotebookColors.BLACK, null));
+		myNotebook.add(new Note("Celebrate","This is my third note", NotebookColors.BLACK, null));
 		
 		System.out.println("Before sort:");
 		
 		for(Note note : myNotebook.getNotes())
 		{
-			System.out.println(note.getTitle());
+			System.out.println(note.getTitle() + " " + note.getComments());
+			note.setTimeStamp(new Date(date));
+			date += day;
 		}
 		
 		myNotebook.sortNotes(new TitleComparator());
@@ -34,11 +41,17 @@ public class SortingTests
 		
 		for(Note note : myNotebook.getNotes())
 		{
-			System.out.println(note.getTitle());
+			System.out.println(note.getTitle() + " " + note.getComments());
 		}
 		
-		if(myNotebook.getNotes().get(0).getTitle() != "Anger")
-			Assert.fail("Anger should come first");
+		myNotebook.sortNotes(new DateComparator());
+		
+		System.out.println("After sort:");
+		
+		for(Note note : myNotebook.getNotes())
+		{
+			System.out.println(note.getTitle() + " " + note.getComments());
+		}
 		
 	}
 	
