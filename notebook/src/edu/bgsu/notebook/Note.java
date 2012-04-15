@@ -35,7 +35,7 @@ public class Note
 		categories.remove(category);   
 	}
 
-	public void setCategory(Category category) 
+	public void addCategory(Category category) 
 	{     
 		categories.add(category);
 	}
