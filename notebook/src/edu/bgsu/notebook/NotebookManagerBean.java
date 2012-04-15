@@ -29,6 +29,8 @@ public class NotebookManagerBean implements Serializable
 	
 	private String autocompleteText = "word";
 
+	private String keyboardColor = NotebookColors.GREEN.getHexString();
+
 	/**
 	 * Default constructor.
 	 */
@@ -98,6 +100,11 @@ public class NotebookManagerBean implements Serializable
 	}
 	
 	// ---------- Generic getters and setters below here ----------
+	
+	public String getKeyboardColor() 
+	{
+		return keyboardColor;
+	}
 	
 	public String getAutocompleteText() 
 	{
