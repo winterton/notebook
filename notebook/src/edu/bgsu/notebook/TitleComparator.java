@@ -3,7 +3,7 @@ package edu.bgsu.notebook;
 import java.util.*;
 
 /**
- * Notebook class.
+ * Title Comparator
  * @author Josh LaRoe
  * @since 04/03/2012
  */
