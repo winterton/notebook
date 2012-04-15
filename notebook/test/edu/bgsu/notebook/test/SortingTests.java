@@ -54,15 +54,4 @@ public class SortingTests
 		}
 		
 	}
-	
-	@Test
-	public void testTwoPlusTwoEqualsFour()
-	{
-		// To test something, we use cases where we know for sure what the result should be.
-		int known_correct_answer = 4;
-		
-		// Then we just check that everything is as we expect.  If not, call the fail() method.
-		if ( 2 + 2 != known_correct_answer )
-			Assert.fail("2 + 2 not equal to 4!  Call George Orwell!");
-	}
 }

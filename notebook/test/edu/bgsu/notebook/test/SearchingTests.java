@@ -1,5 +1,6 @@
 package edu.bgsu.notebook.test;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -37,6 +38,10 @@ public class SearchingTests
 		noteTwo.addCategory(categoryOne);
 		noteThr.addCategory(categoryTwo);
 		
+		noteOne.setTimeStamp(new Date(1325419200));
+		noteTwo.setTimeStamp(new Date(1328097600));
+		noteThr.setTimeStamp(new Date(1328097600));
+		
 		myNotebook.add(categoryOne);
 		myNotebook.add(categoryTwo);
 		
@@ -71,6 +76,16 @@ public class SearchingTests
 		resultsSrch = myNotebook.searchNotes(noteSrch, categorySrch);
 		
 		System.out.println("Category Search results:");
+		
+		for(Note note : resultsSrch)
+			System.out.println(note.getTitle() + " - " + note.getComments());
+		
+		noteSrch = new Note(null, null, null, null);
+		noteSrch.setTimeStamp(new Date(1328097600));
+		
+		resultsSrch = myNotebook.searchNotes(noteSrch, dateSrch);
+		
+		System.out.println("Date Search results:");
 		
 		for(Note note : resultsSrch)
 			System.out.println(note.getTitle() + " - " + note.getComments());
