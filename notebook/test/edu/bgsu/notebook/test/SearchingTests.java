@@ -27,7 +27,7 @@ public class SearchingTests
 	public DateComparator dateSrch = new DateComparator();
 	public CommentsComparator commentsSrch = new CommentsComparator();
 	public CategoryComparator categorySrch = new CategoryComparator();
-	
+
 	public Category categoryOne = new Category("Animals", "These notes are about animals.");
 	public Category categoryTwo = new Category("Plants", "These notes are about plants.");
 	

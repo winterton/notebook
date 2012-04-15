@@ -2,7 +2,6 @@ package edu.bgsu.notebook.test;
 
 import java.util.Date;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import edu.bgsu.notebook.*;
