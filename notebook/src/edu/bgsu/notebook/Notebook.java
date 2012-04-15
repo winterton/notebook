@@ -36,11 +36,19 @@ public class Notebook
 
 	/**
 	 * Searches notes by field
-	 * @return The results list of notes
+	 * @param noteToFind The note with criteria you're searching for
+	 * @param comp Comparator to compare notes
+	 * @return results The results list of notes
 	 */
-	public List<Note> searchNotes() 
+	public List<Note> searchNotes(Note noteToFind, Comparator<Note> comp) 
 	{
-		return notes;
+		List<Note> results = new ArrayList<Note>();
+		
+		for(Note note : notes)
+			if(comp.compare(noteToFind, note) == 0)
+				results.add(note);
+		
+		return results;
 	}
 
 	/**
