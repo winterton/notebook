@@ -7,16 +7,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
 
-@Named
 @SessionScoped
+@Named
 public class NotebookManagerBean implements Serializable
 {
 	private static final long serialVersionUID = 4105775284798910753L;
@@ -123,6 +123,7 @@ public class NotebookManagerBean implements Serializable
 	 */
 	public String getApplicationName()
 	{
+		System.out.println(applicationName);
 		return applicationName;
 	}
 	
