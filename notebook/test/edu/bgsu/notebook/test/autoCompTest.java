@@ -19,6 +19,11 @@ public class autoCompTest {
 		//String dict_loc = "dictionary/74550com.mon";
 		//String dict_loc = "dictionary/354984si.ngl";
 		
+		//For testing
+		long totalLoadTime = 0;
+		long totalSearchTime = 0;
+		boolean reloadDict = true, loaded = false;
+		
 		/**
 		 * autoComplete.search()
 		 * The UI will call this function with the current text that the user has entered as an argument. 
@@ -29,11 +34,34 @@ public class autoCompTest {
 		 * @return results
 		 * @throws IOException
 		 */
+		
 		@Test
-		public void search() throws IOException {
+		public void searchTest() throws IOException{
+			
+			search("also");
+			search("cats");
+			search("grasp");
+			search("the");
+			search("super");
+			search("yes");
+			search("zoo");
+			
+			float avgLoadTimeSec = totalLoadTime/ 7 / 1000F;
+			float avgSearchTimeSec = totalSearchTime/ 7 / 1000F;
+			
+			System.out.println("Test Complete");
+			System.out.println("Average search time: " + avgSearchTimeSec + " seconds.");
+			if(reloadDict)
+				System.out.println("Average dictionary load time: " + avgLoadTimeSec + " seconds.");
+			
+			
+		}
+		
+		
+		public void search(String substring) throws IOException {
 			
 			//Change this value for testing!
-			String substring = "flew";
+			//String substring = "cat";
 			
 			String temp, substring_l, key;
 			int i = 0, x;
@@ -44,7 +72,7 @@ public class autoCompTest {
 			
 			//Substring is empty, has numbers, or only 1 character, so return immediately with a blank result list
 			if(substring.length() <= 1 || hasDigits(substring)) {
-				Assert.fail("Substring \"" + substring + "\" failed initial tests. Length: " + substring.length() + ". Has digits: " + String.valueOf(hasDigits(substring)));
+				System.out.println("Substring \"" + substring + "\" failed initial tests. Length: " + substring.length() + ". Has digits: " + String.valueOf(hasDigits(substring)));
 			}
 			
 			
@@ -67,7 +95,14 @@ public class autoCompTest {
 			key = substring.substring(0, 1);
 			
 			//Load the dictionary into memory
-			loadDictionary();
+			if(reloadDict){
+				dictionary = new HashMap<String, LinkedList<String>>();
+				loadDictionary();
+			}
+			else if(!loaded){
+				loadDictionary();
+				loaded = true;
+			}
 			
 			//Get starting time
 			long start = System.currentTimeMillis();
@@ -134,6 +169,8 @@ public class autoCompTest {
 			//Get elapsed time
 			long elapsedTimeMillis = System.currentTimeMillis()-start;
 			
+			totalSearchTime += elapsedTimeMillis;
+			
 			// Get elapsed time in seconds
 			float elapsedTimeSec = elapsedTimeMillis/1000F;
 			
@@ -185,6 +222,8 @@ public class autoCompTest {
 			
 			//Get elapsed time
 			long elapsedTimeMillis = System.currentTimeMillis()-start;
+			
+			totalLoadTime += elapsedTimeMillis;
 			
 			// Get elapsed time in seconds
 			float elapsedTimeSec = elapsedTimeMillis/1000F;
