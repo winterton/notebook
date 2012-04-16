@@ -6,6 +6,6 @@ import java.util.LinkedList;
 public class Autocomplete
 {
 	private static HashMap<Character, LinkedList<String>> dictionary;
-	
+	asdfasdas
 	
 }
