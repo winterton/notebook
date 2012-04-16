@@ -6,12 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class autoCompTest {
-
-	//HashMap that stores LinkedLists for every letter of the alphabet. After loading, all the words beginning with that letter will belong to the corresponding LinkedList
+public class autoCompTest 
+{
+		//HashMap that stores LinkedLists for every letter of the alphabet. After loading, all the words beginning with that letter will belong to the corresponding LinkedList
 		HashMap<String, LinkedList<String>> dictionary = new HashMap<String, LinkedList<String>>();
 		
 		//Dictionary file location + name
@@ -36,7 +35,8 @@ public class autoCompTest {
 		 */
 		
 		@Test
-		public void searchTest() throws IOException{
+		public void searchTest() throws IOException
+		{
 			
 			search("also");
 			search("cats");
@@ -191,7 +191,8 @@ public class autoCompTest {
 		 * Loads the dictionary file into the HashMap for searching.
 		 * @throws IOException
 		 */
-		private void loadDictionary() throws IOException {
+		private void loadDictionary() throws IOException 
+		{
 			//Get starting time
 			long start = System.currentTimeMillis();
 			
@@ -207,7 +208,8 @@ public class autoCompTest {
 			temp = br.readLine();
 			
 			//Loop until we reach the end of the file
-			while(temp != null) {
+			while(temp != null) 
+			{
 				
 				//Create a key for this letter if it does not already exist
 				if(!dictionary.containsKey(temp.substring(0, 1)))

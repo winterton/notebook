@@ -1,5 +1,13 @@
+package edu.bgsu.notebook.dictionary;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
+
 /**
- * autoComplete.java
+ * Autocomplete.java
  * 
  * @author Matthew Baer
  * 
@@ -9,23 +17,13 @@
  * 
  * Supported Tasks: None. Purely UI function.
  */
-
-package edu.bgsu.notebook;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.*;
-
-public class autoComplete {
-
-	//HashMap that stores LinkedLists for every letter of the alphabet. After loading, all the words beginning with that letter will belong to the corresponding LinkedList
-	HashMap<String, LinkedList<String>> dictionary = new HashMap<String, LinkedList<String>>();
+public class Autocomplete 
+{
+	// HashMap that stores LinkedLists for every letter of the alphabet. After loading, all the words beginning with that letter will belong to the corresponding LinkedList
+	private static HashMap<String, LinkedList<String>> dictionary; // = new HashMap<String, LinkedList<String>>();
 	
 	//Dictionary file location + name
-	String dict_loc = "dictionary/74550com.mon";
-	//String dict_loc = "dictionary/354984si.ngl";
+	private static final String dictionary_location = "dictionary/74550com.mon";
 	
 	/**
 	 * autoComplete.search()
@@ -37,7 +35,8 @@ public class autoComplete {
 	 * @return results
 	 * @throws IOException
 	 */
-	public LinkedList<String> search(String substring) throws IOException {
+	public LinkedList<String> search(String substring) throws IOException 
+	{
 		String temp, substring_l, key;
 		int i = 0, x;
 		boolean foundall = false;
@@ -48,7 +47,6 @@ public class autoComplete {
 		//Substring is empty, has numbers, or only 1 character, so return immediately with a blank result list
 		if(substring.isEmpty() || substring.length() == 1 || hasDigits(substring))
 			return results;
-		
 		
 		/*
 		 * Check the case of the substring. There are two possible cases we will replicate in the results:
@@ -134,17 +132,17 @@ public class autoComplete {
 		return results;
 	}
 	
-	
 	/**
 	 * autoComplete.loadDictionary
 	 * Loads the dictionary file into the HashMap for searching.
 	 * @throws IOException
 	 */
-	private void loadDictionary() throws IOException {
+	private void loadDictionary() throws IOException 
+	{
 		String temp;
 		
 		//Create the input stream to prep the dictionary file for reading
-		InputStream in = this.getClass().getResourceAsStream(dict_loc);
+		InputStream in = this.getClass().getResourceAsStream( dictionary_location );
 		
 		//Create a buffered reader to read in the dictionary file
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
