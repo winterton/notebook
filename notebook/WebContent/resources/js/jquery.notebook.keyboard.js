@@ -37,21 +37,22 @@
             var canvas = Raphael(base.keyboard.attr('id'), base.options.diameter, base.options.diameter);
             angle = 0;
             var color = Raphael.color(base.options.color);
-            while (angle < 360) 
+            while (angle <= 360) 
             {
 		            (function (t, c) {
-		            	charRadius = ((3.14*base.options.diameter)/base.options.numOptions)/2.5;
+		            	charRadius = ((Math.PI*base.options.diameter)/base.options.numOptions)/2.5;
 		            	// Draw the character for this circle.
 		            	px = (0.5*base.options.diameter) + ( (0.45*base.options.diameter) * Math.cos( angle * (Math.PI/180) ) );
 		            	py = (0.5*base.options.diameter) + ( (0.45*base.options.diameter) * Math.sin( angle * (Math.PI/180) ) );
 		            	
 		            	character = base.options.characterSet[Math.ceil((angle/(360/base.options.numOptions)))];
 		            	
-		            	x = 0.19*base.options.diameter;
-		            	y = 0.19*base.options.diameter;
+		            	x = 0.18*base.options.diameter;
+		            	y = 0.18*base.options.diameter;
 		            	text = canvas.text(px, py, character);
 		            	text.transform("s1.5");
 		            	
+	            	
 		            	// Draw the circle and attach event handlers to it.
 		                canvas.circle(x, y, charRadius).attr({stroke: c, fill: c, transform: t, "fill-opacity": .4})
 		                .mouseover(function () {
@@ -107,10 +108,10 @@
     	clientId : '',
     	keyboardElement : 'keyboard',
     	autocompleteValueElement : 'autocomplete',
-        diameter : '200',
+        diameter : '400',
         color : 'cornflowerblue',
-        numOptions : '4',
-        characterSet : [ 'a','b','c','d' ]
+        numOptions : '0',
+        characterSet : [ ]
     };
     
     $.fn.notebook_Keyboard = function(options)

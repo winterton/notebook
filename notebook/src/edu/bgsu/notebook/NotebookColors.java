@@ -13,13 +13,13 @@ public enum NotebookColors
     {
     	switch(this)
     	{
-    	case BLUE : return Color.BLUE;
-    	case RED : return Color.RED;
+    	case BLUE : return new Color(0x7375d8);
+    	case RED : return new Color(0xfe3f44);
     	case YELLOW : return new Color(0xffff80);
-    	case BLACK : return Color.BLACK;
-    	case MAGENTA : return Color.MAGENTA;
-    	case GREEN : return Color.GREEN;
-    	default : return Color.WHITE;
+    	case BLACK : return new Color(0x000000);
+    	case MAGENTA : return new Color(0xdd37b4);
+    	case GREEN : return new Color(0x92ed6b);
+    	default : return new Color(0xffffff);
     	}
     }
     
@@ -27,13 +27,13 @@ public enum NotebookColors
     {
     	switch(this)
     	{
-    	case BLUE : return "#0000ff";
-    	case RED : return "#ff0000";
-    	case YELLOW : return "#ffff80";
+    	case BLUE : return "#7375D8";
+    	case RED : return "#FE3F44";
+    	case YELLOW : return "#FFFF80";
     	case BLACK : return "#000000";
-    	case MAGENTA : return "#ff00ff";
-    	case GREEN : return "#00ff00";
-    	default : return "#ffffff";
+    	case MAGENTA : return "#DD37B4";
+    	case GREEN : return "#92ED6B";
+    	default : return "#FFFFFF";
     	}
     }
 }

@@ -17,11 +17,7 @@
         <h:outputScript library="js" name="jquery.notebook.noteboard.js" />
         <h:outputScript library="js" name="jquery.notebook.keyboard.js" />
         
-        
-        
         <h:outputStylesheet library="css" name="noteboard.css" />
-        
-        
         
 		<title>Research Notebook Manager</title>
 	</h:head>
@@ -35,7 +31,7 @@
 		
 		<div id="container">
 			<h:form>
-				<note:keyboard />
+				<note:keyboard color="#{notebookManagerBean.keyboardColor}" />
 				<ui:insert name="content">
 		    		[Content gets inserted here!]
 		    	</ui:insert>
