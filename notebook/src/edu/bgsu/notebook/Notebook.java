@@ -21,6 +21,8 @@ public class Notebook
 	public Notebook(String _name) 
 	{
 		name = _name;
+		notes = new ArrayList<Note>();
+		categories = new ArrayList<Category>();
 	}
 
 	/**
@@ -34,11 +36,19 @@ public class Notebook
 
 	/**
 	 * Searches notes by field
-	 * @return The results list of notes
+	 * @param noteToFind The note with criteria you're searching for
+	 * @param comp Comparator to compare notes
+	 * @return results The results list of notes
 	 */
-	public List<Note> searchNotes() 
+	public List<Note> searchNotes(Note noteToFind, Comparator<Note> comp) 
 	{
-		return notes;
+		List<Note> results = new ArrayList<Note>();
+		
+		for(Note note : notes)
+			if(comp.compare(noteToFind, note) == 0)
+				results.add(note);
+		
+		return results;
 	}
 
 	/**
@@ -90,5 +100,15 @@ public class Notebook
 	public void setName(String _name)
 	{
 		name = _name;
+	}
+	
+	public List<Note> getNotes()
+	{
+		return notes;
+	}
+	
+	public List<Category> getCategories()
+	{
+		return categories;
 	}
 }
