@@ -27,9 +27,13 @@ public class NotebookManagerBean implements Serializable
 	// The body text of the currently-loaded note.
 	private String noteText = "";
 	
-	private String autocompleteText = "word";
+	private String autocompleteText = "";
 
 	private String keyboardColor = NotebookColors.GREEN.getHexString();
+
+	private Note currentNote;
+	
+	private Notebook notebook;
 
 	/**
 	 * Default constructor.
@@ -48,6 +52,32 @@ public class NotebookManagerBean implements Serializable
 		
 	}
 	
+	
+	/**
+	 * Dictionary autocomplete bean method.
+	 */
+	public List<String> autocomplete( String query )
+	{
+		return Autocomplete.search( query );
+	}
+	
+	/**
+	 * Note/category search autocomplete bean method.
+	 */
+	public List<Note> search( String query )
+	{
+		List<Note> results = new ArrayList<Note>();
+		
+		this.getDemoNotes();
+		
+		Note searchModel = new Note(query, null, null, null);
+		results.addAll( notebook.searchNotes(searchModel, new TitleComparator()) );
+		//for( Note result : notebook.searchNotes(searchModel, new CommentsComparator()) )
+		//	if( ! results.contains( result ) ) results.add( result );
+		
+		return results;
+	}
+	
 	/**
 	 * File upload listener for the 'open notebook' welcome option.  Opens and parses the supplied notebook
 	 * file, and redirects to the main application page.
@@ -61,7 +91,7 @@ public class NotebookManagerBean implements Serializable
 			
 			
 			// Redirect to the main application page.
-			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("board.xhtml");
 		} 
 		catch (IOException e1) { e1.printStackTrace(); }
 	}
@@ -90,6 +120,12 @@ public class NotebookManagerBean implements Serializable
 								"Note " + i + " Comments",
 								NotebookColors.BLUE,
 								categories) );
+		
+		// TODO remove this
+		notebook = new Notebook("Demo");
+		notebook.add( categories.get(0) );
+		for( Note n : notes ) notebook.add( n );
+		
 		return notes;
 	}
 	
@@ -100,6 +136,17 @@ public class NotebookManagerBean implements Serializable
 	}
 	
 	// ---------- Generic getters and setters below here ----------
+	
+	public Note getCurrentNote() 
+	{
+		return this.currentNote;
+	}
+
+	public void setCurrentNote(Note currentNote) 
+	{
+		System.out.println("Setting current note: " + currentNote.getTitle());
+		this.currentNote = currentNote;
+	}
 	
 	public String getKeyboardColor() 
 	{

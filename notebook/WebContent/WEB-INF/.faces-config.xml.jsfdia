@@ -2,10 +2,15 @@
 <PROCESS model-entity="JSFProcess">
  <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="index::#index.xhtml" NAME="output"
-    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="index" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="note::#note.xhtml" NAME="output"
+    PATH="/note.xhtml" TARGET="rules:#note.xhtml" TITLE="note" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="board::#noteboard.xhtml" NAME="output1"
+    PATH="/noteboard.xhtml" TARGET="rules:#noteboard.xhtml"
+    TITLE="board" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+ <PROCESS-ITEM NAME="rules:#note.xhtml" PATH="/note.xhtml"
   SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#noteboard.xhtml" PATH="/noteboard.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

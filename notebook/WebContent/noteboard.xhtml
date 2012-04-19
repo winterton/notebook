@@ -12,7 +12,42 @@
 	
 		<ui:define name="content">
 	
-			<note:noteboard title="Notes" />		    
+			<p:growl id="messages" showSummary="true" showDetail="true" />
+		    				
+		    <p:menubar style="width:50%; float: left;">
+		    	<p:submenu label="File" icon="ui-icon-document">
+		    		<p:menuitem value="New" />
+		    		<p:menuitem value="Open" />
+		    		<p:menuitem value="Save" />
+		    		<p:menuitem value="Exit" />
+		    	</p:submenu>
+		    	<p:submenu label="Edit" icon="ui-icon-pencil">
+		    		<p:menuitem value="Cut" />
+		    		<p:menuitem value="Copy" />
+		    		<p:menuitem value="Paste" /> 
+		    	</p:submenu>
+		    	<p:submenu label="Search" icon="ui-icon-search">
+		    		<p:menuitem value="By Name" />
+		    		<p:menuitem value="By Category" />
+		    	</p:submenu>
+		    </p:menubar>
+		    
+		    <h:outputLabel style="padding-left: 100px; padding-right:10px;" for="autocomplete" value="Search Notes:" />
+		    
+		    <p:autoComplete id="autocomplete" 
+		    	value="#{notebookManagerBean.currentNote}" 
+		    	size="30"
+		    	completeMethod="#{notebookManagerBean.search}"
+		    	var="note"
+		    	itemLabel="#{note.title}"
+		    	itemValue="#{note}"
+		    	converter="NoteConverter" />
+		    
+		    <br /><br />
+		    
+			<note:noteboard title="Notes" />	
+			
+			<p style="text-align:center;"><strong>Hint:</strong>&nbsp;&nbsp;Double-click a note to edit it.&nbsp;&nbsp;Drag and drop notes to re-order them.</p>	    
 		    
 		</ui:define>
 	

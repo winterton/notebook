@@ -12,6 +12,9 @@ public class TitleComparator implements Comparator<Note>
 {
 	public int compare(Note leftNote, Note rightNote)
 	{
-		return leftNote.getTitle().compareTo(rightNote.getTitle());
+		if ( leftNote.getTitle().toLowerCase().contains( rightNote.getTitle().toLowerCase() ) ||
+				rightNote.getTitle().toLowerCase().contains( leftNote.getTitle().toLowerCase() ) ) return 0;
+		
+		else return leftNote.getTitle().toLowerCase().compareTo( rightNote.getTitle().toLowerCase() );
 	}
 }

@@ -12,6 +12,6 @@ public class CommentsComparator implements Comparator<Note>
 {
 	public int compare(Note leftNote, Note rightNote)
 	{
-		return rightNote.getComments().matches("(?i).*" + leftNote.getComments() + ".*") ? 0 : 1;
+		return rightNote.getComments().toLowerCase().matches("(?i).*" + leftNote.getComments().toLowerCase() + ".*") ? 0 : 1;
 	}
 }
