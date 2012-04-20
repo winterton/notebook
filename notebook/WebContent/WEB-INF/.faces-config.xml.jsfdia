@@ -4,13 +4,23 @@
   <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="note::#note.xhtml" NAME="output"
     PATH="/note.xhtml" TARGET="rules:#note.xhtml" TITLE="note" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="board::#noteboard.xhtml" NAME="output1"
+   <PROCESS-ITEM-OUTPUT ID="noteboard::#noteboard.xhtml" NAME="output1"
     PATH="/noteboard.xhtml" TARGET="rules:#noteboard.xhtml"
-    TITLE="board" model-entity="JSFProcessItemOutput"/>
+    TITLE="noteboard" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="new_note::#new#new_note.xhtml"
+    NAME="output2" PATH="/new/new_note.xhtml"
+    TARGET="rules:#new#new_note.xhtml" TITLE="new_note" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="new_category::#new#new_category.xhtml"
+    NAME="output3" PATH="/new/new_category.xhtml"
+    TARGET="rules:#new#new_category.xhtml" TITLE="new_category" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#note.xhtml" PATH="/note.xhtml"
   SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#noteboard.xhtml" PATH="/noteboard.xhtml"
   SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#new#new_category.xhtml"
+  PATH="/new/new_category.xhtml" SHAPE="288,465,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#new#new_note.xhtml"
+  PATH="/new/new_note.xhtml" SHAPE="288,353,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

@@ -8,12 +8,6 @@
 		<converter-class>edu.bgsu.notebook.NoteConverter</converter-class>
 	</converter>
 	
-	<managed-bean>
-		<managed-bean-name>NoteConverter</managed-bean-name>
-		<managed-bean-class>edu.bgsu.notebook.NoteConverter</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	
 	<navigation-rule>
   		
   		<from-view-id>*</from-view-id>
@@ -24,8 +18,18 @@
   		</navigation-case>
   
   		<navigation-case>
-  			<from-outcome>board</from-outcome>
+  			<from-outcome>noteboard</from-outcome>
   			<to-view-id>/noteboard.xhtml</to-view-id>
+  		</navigation-case>
+  		
+  		<navigation-case>
+  			<from-outcome>new_note</from-outcome>
+  			<to-view-id>/new/new_note.xhtml</to-view-id>
+  		</navigation-case>
+  		
+  		<navigation-case>
+  			<from-outcome>new_category</from-outcome>
+  			<to-view-id>/new/new_category.xhtml</to-view-id>
   		</navigation-case>
   
  	</navigation-rule>

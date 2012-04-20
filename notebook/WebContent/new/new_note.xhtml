@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="../WEB-INF/templates/default.xhtml">
+	
+		<ui:define name="content">
+		
+			<p:messages />
+		
+			<h:form>
+				
+				<h4>Title:</h4>
+				
+				<p:focus />
+				<p:inputText id="newTitle" value="#{notebookManagerBean.newNoteTitle}" size="50" />
+				
+				<br />
+				<br />
+				<br />
+				
+				<h4>Drag categories for this note to the right:</h4>
+				<p:pickList id="newNoteCategories" value="#{notebookManagerBean.newNoteCategories}"
+					var="category"
+					itemLabel="#{category}"
+					itemValue="#{category}" />
+				
+				<br />
+				<br />
+				
+				<h4>Comments:</h4>
+			    <p:inputTextarea id="newComments" value="#{notebookManagerBean.newNoteComments}" style="width:75%;" />
+			    
+			    <br />
+			    <br />
+			    <br />
+			    
+				<p:commandButton ajax="false" icon="ui-icon-cancel" value="Cancel and Return" action="noteboard" />
+				&nbsp;&nbsp;&nbsp;
+				<p:commandButton ajax="false" icon="ui-icon-check" value="Create Note" action="#{notebookManagerBean.createNewNote}" />
+					
+			</h:form>
+		
+		</ui:define>
+	
+	</ui:composition>
+</html>

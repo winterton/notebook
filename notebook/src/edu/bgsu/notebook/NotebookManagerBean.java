@@ -7,13 +7,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DualListModel;
 
 @SessionScoped
 @Named
@@ -34,6 +35,13 @@ public class NotebookManagerBean implements Serializable
 	private Note currentNote;
 	
 	private Notebook notebook;
+
+	private String newNoteTitle;
+	private DualListModel<Category> newNoteCategories;
+	private String newNoteComments;
+	private String newCategoryTitle;
+	private String newCategoryComments;
+
 
 	/**
 	 * Default constructor.
@@ -68,12 +76,8 @@ public class NotebookManagerBean implements Serializable
 	{
 		List<Note> results = new ArrayList<Note>();
 		
-		this.getDemoNotes();
-		
 		Note searchModel = new Note(query, null, null, null);
 		results.addAll( notebook.searchNotes(searchModel, new TitleComparator()) );
-		//for( Note result : notebook.searchNotes(searchModel, new CommentsComparator()) )
-		//	if( ! results.contains( result ) ) results.add( result );
 		
 		return results;
 	}
@@ -94,6 +98,20 @@ public class NotebookManagerBean implements Serializable
 			FacesContext.getCurrentInstance().getExternalContext().redirect("board.xhtml");
 		} 
 		catch (IOException e1) { e1.printStackTrace(); }
+	}
+	
+	public String startNewNotebook()
+	{
+		System.out.println("Constructing notebook!");
+		
+		// TODO Have the user enter the notebook name somewhere.
+		notebook = new Notebook("Notebook");
+		
+		notebook.add( new Category("General", "General/miscellaneous notes.") );
+		
+		newNoteCategories = new DualListModel<Category>(notebook.getCategories(), new ArrayList<Category>());
+		
+		return "noteboard";
 	}
 	
 	/**
@@ -135,7 +153,106 @@ public class NotebookManagerBean implements Serializable
 		// TODO
 	}
 	
+	public String createNewCategory()
+	{
+		notebook.add( new Category( newCategoryTitle, newCategoryComments ) );
+		newCategoryTitle = ""; newCategoryComments = "";
+		return "noteboard";
+	}
+	
+	public DualListModel<Category> getNewNoteCategories()
+	{
+		return this.newNoteCategories;
+	}
+	
+	public void setNewNoteCategories(DualListModel<Category> categories)
+	{
+		this.newNoteCategories = categories;
+	}
+	
+	public String createNewNote()
+	{
+		if( newNoteTitle == null )
+		{
+			message("Note must have a title!", "Note must have a title.", FacesMessage.SEVERITY_ERROR);
+			return "";
+		}
+		if( newNoteTitle.length() == 0 )
+		{
+			message("Note must have a title!", "Note must have a title.", FacesMessage.SEVERITY_ERROR);
+			return "";
+		}
+		if( newNoteComments == null )
+		{
+			message("Note must have comments!", "Note must have comments.", FacesMessage.SEVERITY_ERROR);
+			return "";
+		}
+		if( newNoteComments.length() == 0)
+		{
+			message("Note must have comments!", "Note must have comments.", FacesMessage.SEVERITY_ERROR);
+			return "";
+		}
+		
+		message("Added new note!","Added " + newNoteTitle, FacesMessage.SEVERITY_INFO);
+		
+		// TODO Add category selection to new note page.
+		notebook.add( new Note( newNoteTitle, newNoteComments, NotebookColors.YELLOW, new ArrayList<Category>()) );
+		
+		// Clear the new note title and comments fields.
+		newNoteTitle = ""; newNoteComments = "";
+		
+		newNoteCategories = new DualListModel<Category>(notebook.getCategories(), new ArrayList<Category>());
+		
+		// Navigate application to the note browser.
+		return "noteboard";
+	}
+	
 	// ---------- Generic getters and setters below here ----------
+	
+	public Notebook getNotebook() 
+	{
+		return notebook;
+	}
+	
+	public String getNewNoteComments() 
+	{
+		return newNoteComments;
+	}
+
+	public void setNewNoteComments(String newNoteComments) 
+	{
+		this.newNoteComments = newNoteComments;
+	}
+
+	public String getNewCategoryTitle() 
+	{
+		return newCategoryTitle;
+	}
+
+	public void setNewCategoryTitle(String newCategoryTitle)
+	{
+		this.newCategoryTitle = newCategoryTitle;
+	}
+
+	public String getNewCategoryComments() 
+	{
+		return newCategoryComments;
+	}
+
+	public void setNewCategoryComments(String newCategoryComments) 
+	{
+		this.newCategoryComments = newCategoryComments;
+	}
+	
+	public String getNewNoteTitle()
+	{
+		return newNoteTitle;
+	}
+
+	public void setNewNoteTitle(String newNoteTitle) 
+	{
+		this.newNoteTitle = newNoteTitle;
+	}
 	
 	public Note getCurrentNote() 
 	{
@@ -144,7 +261,6 @@ public class NotebookManagerBean implements Serializable
 
 	public void setCurrentNote(Note currentNote) 
 	{
-		System.out.println("Setting current note: " + currentNote.getTitle());
 		this.currentNote = currentNote;
 	}
 	
@@ -170,7 +286,6 @@ public class NotebookManagerBean implements Serializable
 	 */
 	public String getApplicationName()
 	{
-		System.out.println(applicationName);
 		return applicationName;
 	}
 	

@@ -19,15 +19,23 @@ public class Category
 	 */
 	public Category(String _title, String _comments) {
 		this.timeStamp = new Date();
-		this.title = title != null ? title : "";
-		this.comments = comments != null ? comments : "";
+		this.title = _title != null ? _title : "";
+		this.comments = _comments != null ? _comments : "";
 	}
+
 
 	public void setComments(String _comments) 
 	{   
 		comments = _comments;  
 	}
 
+	@Override
+	public String toString()
+	{
+		return title;
+	}
+	
+	
 	public String getComments() 
 	{
 		return comments;

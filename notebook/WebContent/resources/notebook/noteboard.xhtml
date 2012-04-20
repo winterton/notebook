@@ -26,7 +26,7 @@
 				$('#noteboard').notebook_Noteboard( 
 					{
 						notes : [
-									<ui:repeat value="#{notebookManagerBean.demoNotes}" var="note">
+									<ui:repeat value="#{notebookManagerBean.notebook.notes}" var="note">
 										{ 
 											"title" : "#{note.title}", 
 											"comments" : "#{note.comments}", 
