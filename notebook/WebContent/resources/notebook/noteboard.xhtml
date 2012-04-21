@@ -24,26 +24,9 @@
 			$(document).ready(function() {
 				
 				$('#noteboard').notebook_Noteboard( 
-					{
-						notes : [
-									<ui:repeat value="#{notebookManagerBean.notebook.notes}" var="note">
-										{ 
-											"title" : "#{note.title}", 
-											"comments" : "#{note.comments}", 
-											"color" : "#{note.color.hexString}",  
-											"categories" :  [
-																<ui:repeat value="#{note.categories}" var="category">
-																	{
-																		"title" : "#{category.title}",
-																		"comments" : "#{category.comments}"
-																	},
-																</ui:repeat>
-															]
-										},
-									</ui:repeat>
-								]
-					} 
-				);
+				{
+						notes : #{notebookManagerBean.notesJson}
+				})
 				
 			});
 		

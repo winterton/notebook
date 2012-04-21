@@ -11,15 +11,28 @@
 	
 		<ui:define name="content">
 		
+			<p:growl />
+			
+			<h4>Category Title:</h4>
+		
+			<p:focus />
 			<p:inputText value="#{notebookManagerBean.newCategoryTitle}" required="true" label="text" />
 			
 			<br />
 			<br />
+			<br />
 			
+			<h4>Comments:</h4>
 			<p:inputTextarea id="comments" value="#{notebookManagerBean.newCategoryComments}" style="width:75%;" />
 		    
-			<p:commandButton value="Create Category" action="#{notebookManagerBean.createNewCategory()}" />
-			
+		    <br />
+		    <br />
+		    <br />
+		    
+			<p:commandButton ajax="false" icon="ui-icon-cancel" value="Cancel and Return" action="noteboard" />
+			&nbsp;&nbsp;&nbsp;
+			<p:commandButton ajax="false" icon="ui-icon-check" value="Create Category" action="#{notebookManagerBean.createNewCategory}" />
+		
 		</ui:define>
 	
 	</ui:composition>

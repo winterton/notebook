@@ -15,9 +15,9 @@ public class SearchingTests
 {
 	public Notebook myNotebook = new Notebook("My notebook");
 	
-	public Note noteOne = new Note("Milk", "Milk comes from cows.", NotebookColors.BLACK, null);
-	public Note noteTwo = new Note("Eggs", "Eggs come from chickens.", NotebookColors.BLACK, null);
-	public Note noteThr = new Note("Sugar", "Sugar comes from sugarcane.", NotebookColors.BLACK, null);
+	public Note noteOne = new Note("Milk", "Milk comes from cows.", NotebookColors.YELLOW, NotebookColors.BLACK, null);
+	public Note noteTwo = new Note("Eggs", "Eggs come from chickens.", NotebookColors.YELLOW, NotebookColors.BLACK, null);
+	public Note noteThr = new Note("Sugar", "Sugar comes from sugarcane.", NotebookColors.YELLOW, NotebookColors.BLACK, null);
 	
 	public Note noteSrch;
 	
@@ -54,7 +54,7 @@ public class SearchingTests
 		for(Note note : myNotebook.getNotes())
 			System.out.println(note.getTitle() + " - " + note.getComments());
 		
-		noteSrch = new Note("Eggs", null, null, null);
+		noteSrch = new Note("Eggs", null,null, null, null);
 		resultsSrch = myNotebook.searchNotes(noteSrch, titleSrch);
 		
 		System.out.println("Title Search results:");
@@ -62,7 +62,7 @@ public class SearchingTests
 		for(Note note : resultsSrch)
 			System.out.println(note.getTitle() + " - " + note.getComments());
 		
-		noteSrch = new Note(null, "cows", null, null);
+		noteSrch = new Note(null, "cows",null, null, null);
 		resultsSrch = myNotebook.searchNotes(noteSrch, commentsSrch);
 		
 		System.out.println("Comments Search results:");
@@ -70,7 +70,7 @@ public class SearchingTests
 		for(Note note : resultsSrch)
 			System.out.println(note.getTitle() + " - " + note.getComments());
 		
-		noteSrch = new Note(null, null, null, null);
+		noteSrch = new Note(null, null,null, null, null);
 		noteSrch.addCategory(categoryTwo);
 		
 		resultsSrch = myNotebook.searchNotes(noteSrch, categorySrch);
@@ -80,7 +80,7 @@ public class SearchingTests
 		for(Note note : resultsSrch)
 			System.out.println(note.getTitle() + " - " + note.getComments());
 		
-		noteSrch = new Note(null, null, null, null);
+		noteSrch = new Note(null, null, null,null, null);
 		noteSrch.setTimeStamp(new Date(1328097600));
 		
 		resultsSrch = myNotebook.searchNotes(noteSrch, dateSrch);

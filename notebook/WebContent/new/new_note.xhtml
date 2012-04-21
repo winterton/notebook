@@ -11,40 +11,36 @@
 	
 		<ui:define name="content">
 		
-			<p:messages />
-		
-			<h:form>
+			<p:growl />
 				
-				<h4>Title:</h4>
+			<h4>Note Title:</h4>
 				
-				<p:focus />
-				<p:inputText id="newTitle" value="#{notebookManagerBean.newNoteTitle}" size="50" />
+			<p:focus />
+			<p:inputText id="newTitle" value="#{notebookManagerBean.newNoteTitle}" size="50" />
 				
-				<br />
-				<br />
-				<br />
+			<br />
+			<br />
+			<br />
 				
-				<h4>Drag categories for this note to the right:</h4>
-				<p:pickList id="newNoteCategories" value="#{notebookManagerBean.newNoteCategories}"
-					var="category"
-					itemLabel="#{category}"
-					itemValue="#{category}" />
+			<h4>Drag categories for this note to the right:</h4>
+			<p:pickList id="newNoteCategories" value="#{notebookManagerBean.newNoteCategories}"
+				var="category"
+				itemLabel="#{category}"
+				itemValue="#{category}" />
 				
-				<br />
-				<br />
+			<br />
+			<br />
 				
-				<h4>Comments:</h4>
-			    <p:inputTextarea id="newComments" value="#{notebookManagerBean.newNoteComments}" style="width:75%;" />
+			<h4>Comments:</h4>
+			<p:inputTextarea id="newComments" value="#{notebookManagerBean.newNoteComments}" style="width:75%;" />
 			    
-			    <br />
-			    <br />
-			    <br />
+			<br />
+		    <br />
+			<br />
 			    
-				<p:commandButton ajax="false" icon="ui-icon-cancel" value="Cancel and Return" action="noteboard" />
-				&nbsp;&nbsp;&nbsp;
-				<p:commandButton ajax="false" icon="ui-icon-check" value="Create Note" action="#{notebookManagerBean.createNewNote}" />
-					
-			</h:form>
+			<p:commandButton ajax="false" icon="ui-icon-cancel" value="Cancel and Return" action="noteboard" />
+			&nbsp;&nbsp;&nbsp;
+			<p:commandButton ajax="false" icon="ui-icon-check" value="Create Note" action="#{notebookManagerBean.createNewNote}" />
 		
 		</ui:define>
 	

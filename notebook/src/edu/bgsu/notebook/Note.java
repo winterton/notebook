@@ -15,19 +15,21 @@ public class Note
 	private Date timeStamp;
 	private String title;
 	private String comments;
-	private NotebookColors color;
+	private String backgroundColor;
+	private String textColor;
 	private List<Category> categories;
 
 	/**
 	 *  Constructor for new note with categories.
 	 */
-	public Note(String title, String comments, NotebookColors color, List<Category> categories) 
+	public Note(String title, String comments, String bgColor, String textColor, List<Category> categories) 
 	{
 		this.timeStamp = new Date();
 		this.title = title != null ? title : "";
 		this.comments = comments != null ? comments : "";
 		this.categories = categories != null ? categories : new ArrayList<Category>();
-		this.color = color != null ? color : NotebookColors.BLACK;
+		this.backgroundColor = bgColor != null ? bgColor : NotebookColors.YELLOW;
+		this.textColor = textColor != null ? textColor : NotebookColors.BLACK;
 	}
 
 	public void removeCategory(Category category) 
@@ -70,14 +72,24 @@ public class Note
 		return comments;
 	}
 
-	public void setColor(NotebookColors color) 
+	public void setBackgroundColor(String color) 
 	{
-		this.color = color;
+		this.backgroundColor = color;
 	}
 
-	public NotebookColors getColor() 
+	public String getBackgroundColor() 
 	{
-		return color;
+		return backgroundColor;
+	}
+	
+	public void setTextColor(String color)
+	{
+		this.textColor = color;
+	}
+	
+	public String getTextColor()
+	{
+		return textColor;
 	}
 	
 	public Date getTimeStamp()

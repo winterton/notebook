@@ -16,6 +16,8 @@ import javax.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
 
+import com.google.gson.Gson;
+
 @SessionScoped
 @Named
 public class NotebookManagerBean implements Serializable
@@ -30,7 +32,7 @@ public class NotebookManagerBean implements Serializable
 	
 	private String autocompleteText = "";
 
-	private String keyboardColor = NotebookColors.GREEN.getHexString();
+	private String keyboardColor = NotebookColors.GREEN;
 
 	private Note currentNote;
 	
@@ -60,6 +62,14 @@ public class NotebookManagerBean implements Serializable
 		
 	}
 	
+	/**
+	 * Returns the current notebook's list of notes as a JSON-serialized string.
+	 * @return JSON-serialized List<Note>
+	 */
+	public String getNotesJson()
+	{
+		return new Gson().toJson( notebook.getNotes() );
+	}
 	
 	/**
 	 * Dictionary autocomplete bean method.
@@ -76,7 +86,7 @@ public class NotebookManagerBean implements Serializable
 	{
 		List<Note> results = new ArrayList<Note>();
 		
-		Note searchModel = new Note(query, null, null, null);
+		Note searchModel = new Note(query, null, null, null, null);
 		results.addAll( notebook.searchNotes(searchModel, new TitleComparator()) );
 		
 		return results;
@@ -102,12 +112,8 @@ public class NotebookManagerBean implements Serializable
 	
 	public String startNewNotebook()
 	{
-		System.out.println("Constructing notebook!");
-		
 		// TODO Have the user enter the notebook name somewhere.
 		notebook = new Notebook("Notebook");
-		
-		notebook.add( new Category("General", "General/miscellaneous notes.") );
 		
 		newNoteCategories = new DualListModel<Category>(notebook.getCategories(), new ArrayList<Category>());
 		
@@ -127,30 +133,6 @@ public class NotebookManagerBean implements Serializable
 		message.setSummary(summary);
 		message.setDetail(detail);
 		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
-	
-	public List<Note> getDemoNotes()
-	{
-		List<Category> categories = Arrays.asList( new Category[]{ new Category("Demo Notes", "These are for demo/testing purposes only!") } );
-		List<Note> notes = new ArrayList<Note>();
-		for( int i = 0; i < 10; i++ )
-			notes.add( new Note("Note " + i + " Title", 
-								"Note " + i + " Comments",
-								NotebookColors.BLUE,
-								categories) );
-		
-		// TODO remove this
-		notebook = new Notebook("Demo");
-		notebook.add( categories.get(0) );
-		for( Note n : notes ) notebook.add( n );
-		
-		return notes;
-	}
-	
-	public void autocompleteValueChanged(ValueChangeEvent e)
-	{
-		System.out.println("Autocomplete text changed: " + (String)e.getNewValue());
-		// TODO
 	}
 	
 	public String createNewCategory()
@@ -196,7 +178,7 @@ public class NotebookManagerBean implements Serializable
 		message("Added new note!","Added " + newNoteTitle, FacesMessage.SEVERITY_INFO);
 		
 		// TODO Add category selection to new note page.
-		notebook.add( new Note( newNoteTitle, newNoteComments, NotebookColors.YELLOW, new ArrayList<Category>()) );
+		notebook.add( new Note( newNoteTitle, newNoteComments, NotebookColors.YELLOW, NotebookColors.BLACK, new ArrayList<Category>()) );
 		
 		// Clear the new note title and comments fields.
 		newNoteTitle = ""; newNoteComments = "";
@@ -204,6 +186,47 @@ public class NotebookManagerBean implements Serializable
 		newNoteCategories = new DualListModel<Category>(notebook.getCategories(), new ArrayList<Category>());
 		
 		// Navigate application to the note browser.
+		return "noteboard";
+	}
+	
+	public String loadDemoNotebook()
+	{
+		notebook = new Notebook("Demo");
+		
+		Category cat0 = new Category("General", "This is a category for miscellaneous notes.");
+		Category cat1 = new Category("Sea Otters", "This is a category for notes regarding sea otters.");
+		Category cat2 = new Category("Cat Facts", "This is a category for fun facts about cats.");
+		
+		List<Category> note0Cats = new ArrayList<Category>(); note0Cats.add(cat0);
+		List<Category> note1Cats = new ArrayList<Category>(); note1Cats.add(cat1);
+		List<Category> note2Cats = new ArrayList<Category>(); note2Cats.add(cat2);
+		
+		Note note0 = new Note("Shakespeare Quotes", 
+				"What's in a name? That which we call a rose/ By any other name would smell as sweet.", 
+				NotebookColors.YELLOW,
+				NotebookColors.BLACK, 
+				note0Cats );
+		Note note1 = new Note("Sea Otters are the Best", 
+				"The sea otter (Enhydra lutris) is a marine mammal native to the coasts of the northern and eastern North Pacific Ocean. Adult sea otters typically weigh between 14 and 45 kg (30 to 100 lb), making them the heaviest members of the weasel family, but among the smallest marine mammals. Unlike most marine mammals, the sea otter's primary form of insulation is an exceptionally thick coat of fur, the densest in the animal kingdom. Although it can walk on land, the sea otter lives mostly in the ocean.",
+				NotebookColors.BLUE, 
+				NotebookColors.BLACK, 
+				note1Cats);
+		Note note2 = new Note("Cat Facts!",
+				"Both humans and cats have identical regions in the brain responsible for emotion.",
+				NotebookColors.GREEN,
+				NotebookColors.BLACK,
+				note2Cats);
+		Note note3 = new Note("Cat Facts 2",
+				"Unlike humans, cats do not need to blink their eyes on a regular basis to keep their eyes lubricated.",
+				NotebookColors.GREEN,
+				NotebookColors.BLACK,
+				note2Cats);
+		
+		notebook.add(cat0); notebook.add(cat1); notebook.add(cat2);
+		notebook.add(note2); notebook.add(note3); notebook.add(note0); notebook.add(note1);  
+		
+		newNoteCategories = new DualListModel<Category>(notebook.getCategories(), new ArrayList<Category>());
+		
 		return "noteboard";
 	}
 	
@@ -267,17 +290,6 @@ public class NotebookManagerBean implements Serializable
 	public String getKeyboardColor() 
 	{
 		return keyboardColor;
-	}
-	
-	public String getAutocompleteText() 
-	{
-		return autocompleteText;
-	}
-
-	public void setAutocompleteText(String autocompleteText) 
-	{
-		System.out.println("Changing autocomplete text: " + autocompleteText);
-		this.autocompleteText = autocompleteText;
 	}
 	
 	/**

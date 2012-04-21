@@ -21,9 +21,9 @@ public class SortingTests
 		long date = 132537200;
 		long day = 86400;
 		
-		myNotebook.add(new Note("Lactose","This is my first note", NotebookColors.BLACK, null));
-		myNotebook.add(new Note("Anger","This is my second note", NotebookColors.BLACK, null));
-		myNotebook.add(new Note("Celebrate","This is my third note", NotebookColors.BLACK, null));
+		myNotebook.add(new Note("Lactose","This is my first note", NotebookColors.YELLOW, NotebookColors.BLACK, null));
+		myNotebook.add(new Note("Anger","This is my second note", NotebookColors.YELLOW, NotebookColors.BLACK, null));
+		myNotebook.add(new Note("Celebrate","This is my third note", NotebookColors.YELLOW, NotebookColors.BLACK, null));
 		
 		System.out.println("Before sort:");
 		

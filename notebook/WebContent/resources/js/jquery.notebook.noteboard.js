@@ -35,19 +35,21 @@
             	// Draw each note
             	var noteDiv = $(document.createElement('div'));
             	noteDiv.addClass('note');
+            	noteDiv.css('background-color',note.backgroundColor);
+            	noteDiv.css('color',note.textColor);
             	var noteHeader = $(document.createElement('div'));
             	noteHeader.addClass('noteHeader');
             	noteHeader.text(note.title);
             	var noteBody = $(document.createElement('div'));
             	noteBody.addClass('noteBody');
-            	noteBody.text('Note body');
-            	var noteComments = $(document.createElement('div'));
-            	noteComments.addClass('noteComments');
-            	noteComments.text(note.comments);
+            	noteBody.text(note.comments);
+            	//var noteComments = $(document.createElement('div'));
+            	//noteComments.addClass('noteComments');
+            	//noteComments.text(note.comments);
             	
             	noteDiv.append(noteHeader);
             	noteDiv.append(noteBody);
-            	noteDiv.append(noteComments);
+            	//noteDiv.append(noteComments);
             	
             	base.$el.append( noteDiv );
            	}
