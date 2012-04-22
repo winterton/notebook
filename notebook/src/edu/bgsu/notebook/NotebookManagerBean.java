@@ -196,10 +196,12 @@ public class NotebookManagerBean implements Serializable
 		Category cat0 = new Category("General", "This is a category for miscellaneous notes.");
 		Category cat1 = new Category("Sea Otters", "This is a category for notes regarding sea otters.");
 		Category cat2 = new Category("Cat Facts", "This is a category for fun facts about cats.");
+		Category cat3 = new Category("Poets", "I love poetry!");
 		
-		List<Category> note0Cats = new ArrayList<Category>(); note0Cats.add(cat0);
+		List<Category> note0Cats = new ArrayList<Category>(); note0Cats.add(cat0); note0Cats.add(cat3);
 		List<Category> note1Cats = new ArrayList<Category>(); note1Cats.add(cat1);
 		List<Category> note2Cats = new ArrayList<Category>(); note2Cats.add(cat2);
+		List<Category> note4Cats = new ArrayList<Category>(); note4Cats.add(cat0);
 		
 		Note note0 = new Note("Shakespeare Quotes", 
 				"What's in a name? That which we call a rose/ By any other name would smell as sweet.", 
@@ -221,9 +223,14 @@ public class NotebookManagerBean implements Serializable
 				NotebookColors.GREEN,
 				NotebookColors.BLACK,
 				note2Cats);
+		Note note4 = new Note("Usability Engineering",
+				"This is the best class ever.  For real.",
+				NotebookColors.RED,
+				NotebookColors.GREEN,
+				note4Cats);
 		
 		notebook.add(cat0); notebook.add(cat1); notebook.add(cat2);
-		notebook.add(note2); notebook.add(note3); notebook.add(note0); notebook.add(note1);  
+		notebook.add(note2); notebook.add(note3); notebook.add(note0); notebook.add(note1); notebook.add(note4);
 		
 		newNoteCategories = new DualListModel<Category>(notebook.getCategories(), new ArrayList<Category>());
 		

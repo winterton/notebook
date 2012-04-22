@@ -24,12 +24,10 @@
             for( var i = 0; i < base.options.notes.length; i++ )
             {
             	var note = base.options.notes[i];
-            	console.log( note.title + ' (' + note.comments + ') - ' + note.color );
             	
             	for( var j = 0; j < note.categories.length; j++ )
             	{
-            		var category = note.categories[j];
-            		console.log( '   ' + category.title + ' (' + category.comments + ')' );
+            		//var category = note.categories[j];
             	}
             	
             	// Draw each note
@@ -37,19 +35,41 @@
             	noteDiv.addClass('note');
             	noteDiv.css('background-color',note.backgroundColor);
             	noteDiv.css('color',note.textColor);
+            	
             	var noteHeader = $(document.createElement('div'));
             	noteHeader.addClass('noteHeader');
-            	noteHeader.text(note.title);
+            	//noteHeader.text(note.title);
+            	
+            	var noteHeaderText = $(document.createElement('div'));
+            	noteHeaderText.text(note.title);
+            	noteHeaderText.css('width','80%');
+            	noteHeaderText.css('height','100%');
+            	noteHeaderText.css('text-overflow','ellipsis');
+            	noteHeaderText.css('float','left');
+            	
+            	noteHeader.append(noteHeaderText);
+            	
+            	var deleteButton = $(document.createElement('button'));
+            	deleteButton.text('X');
+            	deleteButton.css('float','right');
+            	
+            	deleteButton.live('mouseenter', function(e){
+            		$(e.target).css('color','#ddd');
+            	});
+            	
+            	deleteButton.live('mouseleave', function(e){
+            		$(e.target).css('color','#000');
+            	});
+            	
+            	noteHeader.append(deleteButton);
+            	
+            	
             	var noteBody = $(document.createElement('div'));
             	noteBody.addClass('noteBody');
             	noteBody.text(note.comments);
-            	//var noteComments = $(document.createElement('div'));
-            	//noteComments.addClass('noteComments');
-            	//noteComments.text(note.comments);
             	
             	noteDiv.append(noteHeader);
             	noteDiv.append(noteBody);
-            	//noteDiv.append(noteComments);
             	
             	base.$el.append( noteDiv );
            	}

@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:note="http://java.sun.com/jsf/composite/notebook">
+
+	<h:head>
+	
+		<style>
+			body
+			{
+				font-family : arial, helvetica, sans-serif;
+				background-color : #fff;
+			}
+			.readme
+			{
+				float : left;
+				align : center;
+				width : 40%;
+				margin-left : 30%;
+				margin-right : 30%;
+				background-color : #eee;
+				border-radius : 15px;
+				padding : 15px;
+			}
+			.returnLinkDiv
+			{
+				float : right;
+				background-color : #fff;
+				width : 40%;
+				align : center;
+				margin-left : 30%;
+				margin-right : 30%;
+			}
+		</style>
+	
+	    <h:outputScript library="js" name="raphael.js" />
+        <h:outputScript library="js" name="jquery.notebook.noteboard.js" />
+        <h:outputScript library="js" name="jquery.notebook.keyboard.js" />
+	
+		<script>
+			$(document).ready(function(){
+
+				$("#catInput").keyup(function(e){
+					if( $("#catInput").val() == 'cat' )
+					{
+						if( $("#catResponse").css('display') == 'none' )
+						{
+							$("#catResponse").css('display','inline');
+							$("#catResponse").effect('highlight', {color:'#ffff80'}, 2000);
+		
+						}
+					} 
+				});
+
+			});
+		</script>
+	
+	</h:head>
+	
+	<h:body>
+	
+		<note:keyboard color="#{notebookManagerBean.keyboardColor}" />
+				
+		<h:form>
+		
+			<div class="returnLinkDiv">
+				<br />
+				<p:commandLink style="float : right;" ajax="false" value="Return to Welcome Screen" action="welcome" />
+				<br /><br />
+			</div>
+		
+			<div class="readme">
+
+				<div>
+					
+					<h4>README</h4>
+					<p>Welcome to the Research Notebook Manager.  To begin, you should ensure
+					   that your web browser is configured as follows:</p>
+					<ul>
+						<li>Javascript <strong>must</strong> be enabled.</li>
+						<li>If you are using Internet Explorer, it is recommended that you use the latest version (IE9).</li>
+						<li>If, with any other browser, you encounter issues or seemingly missing functionality, it is 
+						    strongly reccommended that you upgrade to the latest available stable release version.  See below
+						    for links to the latest downloads for most popular web browsers.</li>
+					</ul>
+					<h5>Using the application:</h5>
+					<p>This application is built to be fully accessible for users restricted to a
+					   mouse-only method of input.  In order to maximize the efficiency of mouse-based
+					   text input, we've created an intuitive on-screen keyboard to assist you.  To
+					   enter text into any field in this application, simply right-click it, and the
+					   keyboard will appear.  Go ahead and right-click now on the field below.  Try
+					   to enter the word "cat".</p>
+					<input type="text" id="catInput" />
+					<br />
+					<br />
+					<p id="catResponse" style="background-color:#eee;display:none;">Good job!  That wasn't too hard, was it?
+					The autocomplete functionality built into the keyboard should help to further
+					reduce the effort required to input text via the mouse.</p>
+					<h5>Browser downloads:</h5>
+					<ul>
+						<li><a href="http://chrome.google.com">Google Chrome</a></li>
+						<li><a href="http://www.mozilla.org/en-US/firefox/new/">Mozilla Firefox</a></li>
+						<li><a href="http://windows.microsoft.com/en-US/internet-explorer/downloads/ie-9/worldwide-languages">Internet Explorer</a></li>
+					</ul>
+					
+				</div>
+			</div>
+			
+		</h:form>
+		
+	</h:body>
+		    
+</html>

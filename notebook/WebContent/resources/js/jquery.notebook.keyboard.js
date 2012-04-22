@@ -26,7 +26,7 @@
             // Build the keyboard and make it invisible.
             base.keyboard = $('[id='+base.options.keyboardElement+']');
             
-            base.autocomplete = $('[id="'+base.options.clientId+':'+base.options.autocompleteValueElement+'"]');
+            //base.autocomplete = $('[id="'+base.options.clientId+':'+base.options.autocompleteValueElement+'"]');
             
             base.keyboard.css( {
             	'width' : base.options.diameter,
@@ -62,18 +62,17 @@
 		                }).click(function(){
 		                	console.log( this.character );
 		                	// Append the character to the autocomplete word and hidden value.
-		                	base.autocomplete.val(base.autocomplete.val()+this.character);
-		                	base.autoText.remove();
-		                	base.autoText = canvas.text(base.options.diameter/2, base.options.diameter/2, base.autocomplete.val());
-		                	base.autoText.transform("s2");
+		                	//base.autocomplete.val(base.autocomplete.val()+this.character);
+		                	//base.autoText.remove();
+		                	//base.autoText = canvas.text(base.options.diameter/2, base.options.diameter/2, base.autocomplete.val());
+		                	//base.autoText.transform("s2");
 		                }).character = character;
 	            })("r" + angle + " " + 0.5*base.options.diameter +", "+0.5*base.options.diameter, color);
 	            angle += (360/base.options.numOptions);
 	        }
             
-            console.log(base.autocomplete.val());
-            base.autoText = canvas.text(base.options.diameter/2, base.options.diameter/2, base.autocomplete.val());
-            base.autoText.transform("s2");
+           // base.autoText = canvas.text(base.options.diameter/2, base.options.diameter/2, base.autocomplete.val());
+           // base.autoText.transform("s2");
             
             // Hide the keyboard
             base.keyboard.hide();

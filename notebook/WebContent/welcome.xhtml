@@ -9,6 +9,13 @@
 
 	<h:head>
 	
+		<style>
+			.welcomeButton
+			{
+				width : 100%;
+			}
+		</style>
+	
 	</h:head>
 	
 	<h:body>
@@ -17,12 +24,14 @@
 			<p:dialog visible="true" modal="true" draggable="false" resizable="false" closable="false" showHeader="false"
 				widgetVar="welcome">  
 				<p style="text-align:center;">Welcome to the #{notebookManagerBean.applicationName}.  Please choose an option below.</p>
-			    <p:commandButton ajax="false" icon="ui-icon-document" value="Start a New Notebook" style="width:100%;" 
+			    <p:commandButton styleClass="welcomeButton" ajax="false" icon="ui-icon-document" value="Start a New Notebook"
 			    	action="#{notebookManagerBean.startNewNotebook()}" />
-			    <p:commandButton icon="ui-icon-folder-open" value="Open an Existing Notebook" style="width:100%;" 
+			    <p:commandButton styleClass="welcomeButton" icon="ui-icon-folder-open" value="Open an Existing Notebook"
 			    	onclick="welcome.hide(); upload.show();" />
-			    <p:commandButton ajax="false" icon="ui-icon-lightbulb" value="See a Demo Notebook" style="width:100%;"
+			    <p:commandButton styleClass="welcomeButton" ajax="false" icon="ui-icon-lightbulb" value="See a Demo Notebook"
 			    	action="#{notebookManagerBean.loadDemoNotebook()}" />
+			    <p:commandButton styleClass="welcomeButton" ajax="false" icon="ui-icon-note" value="View the README"
+			    	action="readme" />
 			</p:dialog>
 			
 			<p:dialog modal="true" widgetVar="upload" resizable="false" closable="false" showHeader="false">
