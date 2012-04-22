@@ -30,8 +30,8 @@ public class NotebookManagerBean implements Serializable
 	// The body text of the currently-loaded note.
 	private String noteText = "";
 	
-	private String autocompleteText = "";
-
+	private String keyboardAutocompleteText = "";
+	
 	private String keyboardColor = NotebookColors.GREEN;
 
 	private Note currentNote;
@@ -76,7 +76,13 @@ public class NotebookManagerBean implements Serializable
 	 */
 	public List<String> autocomplete( String query )
 	{
-		return Autocomplete.search( query );
+		List<String> results = new ArrayList<String>();
+		
+		results.add( query ); 
+		
+		results.addAll( Autocomplete.search( query ) );
+		
+		return results;
 	}
 	
 	/**
@@ -102,10 +108,12 @@ public class NotebookManagerBean implements Serializable
 		try 
 		{
 			// TODO Read in the notebook file.
+			notebook = new Notebook("Notebook");
 			
+			newNoteCategories = new DualListModel<Category>(notebook.getCategories(), new ArrayList<Category>());
 			
 			// Redirect to the main application page.
-			FacesContext.getCurrentInstance().getExternalContext().redirect("board.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("noteboard.xhtml");
 		} 
 		catch (IOException e1) { e1.printStackTrace(); }
 	}
@@ -238,6 +246,17 @@ public class NotebookManagerBean implements Serializable
 	}
 	
 	// ---------- Generic getters and setters below here ----------
+	
+	public String getKeyboardAutocompleteText() 
+	{
+		return keyboardAutocompleteText;
+	}
+
+	public void setKeyboardAutocompleteText(String keyboardAutocompleteText) 
+	{
+		this.keyboardAutocompleteText = keyboardAutocompleteText;
+	}
+
 	
 	public Notebook getNotebook() 
 	{

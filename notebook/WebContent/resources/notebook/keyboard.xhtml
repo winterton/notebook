@@ -12,14 +12,16 @@
 				
 	<composite:implementation>
 	
-		<script type="text/javascript">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" />
+	
+		<script>
 
 			$(document).ready(function() {
 
 				$(document).notebook_Keyboard( {
 						'clientId' : '#{cc.clientId}',
 						'keyboardElement' : 'keyboard',
-						'autocompleteValueElement' : 'autocomplete',
+						'autocompleteValueElement' : 'keyboardAutocomplete',
 						'diameter' : '400',
 						'color' : '#{cc.attrs.color}',
 						'numOptions' : '26',
@@ -32,7 +34,12 @@
 		
 		</script>
 		
-		<div id="keyboard" />
+		<div id="keyboard">
+<p:autoComplete style="left:50%; top:50%;" id="keyboardAutocomplete" minQueryLength="2" value="#{notebookManagerBean.keyboardAutocompleteText}"
+	completeMethod="#{notebookManagerBean.autocomplete}" widgetVar="autocompleteWidget" />
+		</div>
+		
+		
 		
 	</composite:implementation>
 	
