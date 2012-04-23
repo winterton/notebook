@@ -42,7 +42,11 @@
 			    	var="note"
 			    	itemLabel="#{note.title}"
 			    	itemValue="#{note}"
-			    	converter="NoteConverter" />
+			    	converter="NoteConverter" 
+			    	forceSelection="true" 
+			    	widgetVar="noteSearch" />
+			    	
+			    <p:commandButton ajax="false" action="note" value="Edit" />
 			    
 			    <br /><br />
 			    

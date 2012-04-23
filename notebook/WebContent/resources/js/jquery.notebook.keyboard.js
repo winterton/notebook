@@ -28,6 +28,8 @@
         	
         	base.inKey = false;
         	
+        	base.targetField;
+        	
         	// Extend the options with the defaults if necessary.
             base.options = $.extend({},$.notebook.Keyboard.defaultOptions, options);
             
@@ -35,16 +37,8 @@
             base.keyboard = $('[id='+base.options.keyboardElement+']');
            
             // Uncomment this to use Primefaces autocomplete
-            base.autocomplete = $('[id="'+base.options.clientId+':'+base.options.autocompleteValueElement+'"]');
-
-            // Uncomment this to build fresh autocomplete input field
-            //base.autocomplete = $(document.createElement('input'));
-           //base.keyboard.append(base.autocomplete);
-           // base.autocomplete.autocomplete({
-           // 	source : ["cat"]
-           // });
-            
-            
+            base.autocomplete = $('[id="'+base.options.clientId+':'+base.options.autocompleteValueElement+'_input"]');
+          
             base.autocomplete.css({
             	'position' : 'absolute',
             	'top' : base.options.diameter/2,
@@ -52,6 +46,55 @@
             	'z-index' : '51',
             	'size' : '15'
             });
+            
+            base.label = $(document.createElement('div'));
+            base.label.text('Click a field to add to it.');
+            base.label.css({
+            	'position' : 'absolute',
+            	'z-index' : '52',
+            	'color' : 'black',
+            	'top' : '60%',
+            	'left' : '25%'
+            });
+            base.keyboard.append( base.label );
+            
+            base.autocomplete.val('');
+            
+            base.button = $(document.createElement('button'));
+            base.button.text('Add');
+            base.button.click(function(e){
+            	if( base.targetField )
+            	{
+            		base.targetField.val( base.targetField.val() + base.autocomplete.val() + ' ' );
+            		if( $("#autocomplete") )
+            		{
+            			noteSearch.search( base.autocomplete.val() );
+            		}
+            		base.autocomplete.val('');
+            	}
+            	return false;
+            });
+            base.button.css({
+            	'z-index' : '52',
+            	'position' : 'absolute',
+            	'top' : '50%',
+            	'left' : '75%'
+            });
+            base.keyboard.append(base.button);
+            
+            base.clearButton = $(document.createElement('button'));
+            base.clearButton.text('Clear');
+            base.clearButton.click(function(e){
+            	base.autocomplete.val('');
+            	return false;
+            });
+            base.clearButton.css({
+            	'z-index':'52',
+            	'position':'absolute',
+            	'top':'60%',
+            	'left':'75%'
+            });
+            base.keyboard.append(base.clearButton);
             
             base.keyboard.css( {
             	'width' : base.options.diameter,
@@ -70,16 +113,18 @@
 		            (function (t, c) {
 		            	charRadius = ((Math.PI*base.options.diameter)/base.options.numOptions)/2.5;
 		            	// Draw the character for this circle.
-		            	px = (0.5*base.options.diameter) + ( (0.45*base.options.diameter) * Math.cos( angle * (Math.PI/180) ) );
-		            	py = (0.5*base.options.diameter) + ( (0.45*base.options.diameter) * Math.sin( angle * (Math.PI/180) ) );
+		            	px = (0.5*base.options.diameter) + ( (0.45*base.options.diameter) * Math.cos( (angle-135) * (Math.PI/180) ) );
+		            	py = (0.5*base.options.diameter) + ( (0.45*base.options.diameter) * Math.sin( (angle-135) * (Math.PI/180) ) );
 		            	
 		            	character = base.options.characterSet[Math.ceil((angle/(360/base.options.numOptions)))];
+		            	
+		            	console.log('angle ' + angle + ' char ' + character);
 		            	
 		            	x = 0.18*base.options.diameter;
 		            	y = 0.18*base.options.diameter;
 		            	text = canvas.text(px, py, character);
 		            	text.transform("s1.5");
-		            	
+		            	//text.transform("r"+angle+" "+0.5*base.options.diameter+","+0.5*base.options.diameter);
 	            	
 		            	// Draw the circle and attach event handlers to it.
 		                canvas.circle(x, y, charRadius).attr({stroke: c, fill: c, transform: t, "fill-opacity": .4})
@@ -90,12 +135,9 @@
 		                    this.animate({"fill-opacity": .4}, 200);
 		                    base.inKey = false;
 		                }).click(function(){
-		                	console.log( this.character );
 		                	// Append the character to the autocomplete word and hidden value.
-		                	//base.autocomplete.val(base.autocomplete.val()+this.character);
-		                	base.autocompleteText = base.autocompleteText + this.character;
-		                	//autocompleteWidget.setText( base.autocompleteText );
-		                	autocompleteWidget.search( base.autocompleteText );
+		                	base.autocomplete.val(base.autocomplete.val()+this.character);
+		                	autocompleteWidget.search( base.autocomplete.val() );
 		                }).character = character;
 	            })("r" + angle + " " + 0.5*base.options.diameter +", "+0.5*base.options.diameter, color);
 	            angle += (360/base.options.numOptions);
@@ -119,6 +161,30 @@
             		base.keyboard.hide();
             		base.active = false;
             	}
+            	
+            	// Keep track of the element we clicked on.
+            	if( !base.targetField )
+            	{
+            		if( e.target.type == 'text' || e.target.type == 'textarea' )
+            		{
+            			$(e.target).effect('highlight', {color:'#ffff80'}, 3000);
+            			base.targetField = $(e.target);
+            			base.label.hide();
+            		}
+            	}
+            	
+            });
+            
+            // Bind the click event.
+            base.$el.click( function(e) 
+            {
+            	if( e.target.type == 'text' || e.target.type == 'textarea' )
+            	{
+            		$(e.target).effect('highlight', {color:'#ffff80'}, 3000);
+            		base.targetField = $(e.target);
+            		base.label.hide();
+            	}
+            	console.log( e.target.type );
             });
             
             base.keyboard.mousedown(function(e){
@@ -143,8 +209,11 @@
         	// Position the keyboard appropriately and make it visible.
     		base.keyboard.css('top', e.pageY-base.options.diameter/2);
     		base.keyboard.css('left', e.pageX-base.options.diameter/2);
-        	
-    		//base.autocomplete.css('top',500); base.autocomplete.css('left',1000);
+    		
+    		if( ! base.targetField )
+    		{
+    			base.label.show();
+    		}
     		
         	base.keyboard.show();
         };

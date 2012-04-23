@@ -197,6 +197,12 @@ public class NotebookManagerBean implements Serializable
 		return "noteboard";
 	}
 	
+	public String updateNote()
+	{
+		
+		return "noteboard";
+	}
+	
 	public String loadDemoNotebook()
 	{
 		notebook = new Notebook("Demo");
@@ -237,7 +243,7 @@ public class NotebookManagerBean implements Serializable
 				NotebookColors.GREEN,
 				note4Cats);
 		
-		notebook.add(cat0); notebook.add(cat1); notebook.add(cat2);
+		notebook.add(cat0); notebook.add(cat1); notebook.add(cat2); notebook.add(cat3);
 		notebook.add(note2); notebook.add(note3); notebook.add(note0); notebook.add(note1); notebook.add(note4);
 		
 		newNoteCategories = new DualListModel<Category>(notebook.getCategories(), new ArrayList<Category>());

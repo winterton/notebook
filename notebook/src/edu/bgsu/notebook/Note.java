@@ -1,5 +1,6 @@
 package edu.bgsu.notebook;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,8 +11,10 @@ import java.util.List;
  * @since 04/03/2012
  */
 
-public class Note
+public class Note implements Serializable
 {
+	private static final long serialVersionUID = 1569621919572165615L;
+	
 	private Date timeStamp;
 	private String title;
 	private String comments;
