@@ -36,7 +36,7 @@
             // Build the keyboard and make it invisible.
             base.keyboard = $('[id='+base.options.keyboardElement+']');
            
-            // Uncomment this to use Primefaces autocomplete
+            // Use Primefaces autocomplete
             base.autocomplete = $('[id="'+base.options.clientId+':'+base.options.autocompleteValueElement+'_input"]');
           
             base.autocomplete.css({
@@ -66,11 +66,12 @@
             	if( base.targetField )
             	{
             		base.targetField.val( base.targetField.val() + base.autocomplete.val() + ' ' );
-            		if( $("#autocomplete") )
-            		{
-            			noteSearch.search( base.autocomplete.val() );
-            		}
+            		txt = base.autocomplete.val();
             		base.autocomplete.val('');
+            		if( noteSearch != undefined )
+            		{
+            			noteSearch.search( txt );
+            		}
             	}
             	return false;
             });
@@ -180,11 +181,13 @@
             {
             	if( e.target.type == 'text' || e.target.type == 'textarea' )
             	{
-            		$(e.target).effect('highlight', {color:'#ffff80'}, 3000);
-            		base.targetField = $(e.target);
-            		base.label.hide();
+            		if( $(e.target).attr('id') != base.autocomplete.attr('id') )
+            		{
+	            		$(e.target).effect('highlight', {color:'#ffff80'}, 3000);
+	            		base.targetField = $(e.target);
+	            		base.label.hide();
+            		}
             	}
-            	console.log( e.target.type );
             });
             
             base.keyboard.mousedown(function(e){
